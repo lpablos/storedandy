@@ -2,18 +2,22 @@
   <div>
     <slider-banner />
     <v-container>
-      <v-row><p>Hola</p></v-row>
+      <v-row>
+        <product-small />
+      </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
-import SliderBanner from "@/components/SliderBanner"
+import SliderBanner from "@/components/SliderBanner.vue";
+import ProductSmall from "@/components/ProductSmall.vue";
 
 export default {
   name: "HelloWorld",
   components: {
-    SliderBanner
+    SliderBanner,
+    ProductSmall
   }
 };
 </script>
