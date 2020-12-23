@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <v-dialog :persistent="true" v-model="dialog" width="500">
+    <v-dialog transition="dialog-bottom-transition" :persistent="true" v-model="dialog" width="500">
       <v-card class="mx-auto" max-width="500">
         <v-carousel height="300">
           <v-carousel-item
