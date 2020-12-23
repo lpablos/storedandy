@@ -9,6 +9,7 @@
             :src="item.src"
             reverse-transition="fade-transition"
             transition="fade-transition"
+            height="300"
           ></v-carousel-item>
         </v-carousel>
         <v-card-title>
@@ -18,7 +19,9 @@
           <div class="my-4 subtitle-1">
             $15.00 MXN
           </div>
-          <div> Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
+          <div>
+            Small plates salads & sandwiches an intimate setting with seats plus patio seating
+          </div>
         </v-card-text>
         <v-divider class="mx-4"></v-divider>
         <v-card-actions class="justify-center">
@@ -35,7 +38,7 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       items: [
         {
@@ -63,5 +66,5 @@ export default {
       this.$emit("dialog-close", false);
     }
   }
-}
+};
 </script>
