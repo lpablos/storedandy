@@ -29,16 +29,13 @@
               <v-card class="mb-12" color="grey lighten-1" height="200px">
               </v-card>
               <v-divider></v-divider>
-              <v-col>
-                <v-btn color="primary" @click="e1 = 2">
-                  Continue
-                </v-btn>
-              </v-col>
-              <v-col class="text-right">
-                <v-btn text>
-                  Cancel
-                </v-btn>
-              </v-col>
+              <v-btn color="primary" @click="e1 = 2">
+                Continuar
+              </v-btn>
+
+              <v-btn text class="float-right">
+                Cerrar
+              </v-btn>
             </v-stepper-content>
 
             <v-stepper-content step="2">
@@ -46,11 +43,11 @@
               </v-card>
               <v-divider></v-divider>
               <v-btn color="primary" @click="e1 = 3">
-                Continue
+                Confirmar
               </v-btn>
 
-              <v-btn text>
-                Cancel
+              <v-btn text class="float-right">
+                Cerrar
               </v-btn>
             </v-stepper-content>
 
@@ -59,11 +56,11 @@
               </v-card>
               <v-divider></v-divider>
               <v-btn color="primary" @click="e1 = 1">
-                Continue
+                Finalizar
               </v-btn>
 
-              <v-btn text>
-                Cancel
+              <v-btn text class="float-right">
+                Cerrar
               </v-btn>
             </v-stepper-content>
           </v-stepper-items>
