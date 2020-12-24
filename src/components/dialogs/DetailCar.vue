@@ -3,7 +3,7 @@
     <v-dialog v-model="show" width="800">
       <v-card>
         <v-card-title class="headline grey lighten-2">
-          Privacy Policy
+          Carrito de pedido
         </v-card-title>
         <v-stepper v-model="e1">
           <v-stepper-header>
