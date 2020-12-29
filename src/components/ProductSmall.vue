@@ -270,24 +270,33 @@
 </template>
 <script>
 import DetailItem from "@/components/dialogs/DetailItem.vue";
+import AccesorioDataService from "../services/AccesorioDataService";
 export default {
   data: () => ({
     loading: false,
     selection: 1,
     items: 3,
-    showDetial: false
+    showDetial: false,
+    listado: null
   }),
+  created: function() {
+    this.getAccesiorosAll();
+  },
   methods: {
     reserve() {
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
-    showDetialInfo(){
+    showDetialInfo() {
       this.reserve();
       this.showDetial = true;
     },
-    dialogClose(e){
+    dialogClose(e) {
       this.showDetial = e;
+    },
+    getAccesiorosAll() {
+      console.log("Listo para cargar todos los accesorios");
+      this.listado = AccesorioDataService.getAll();
     }
   },
   components: {
