@@ -1,5 +1,11 @@
 <template>
   <v-row no-gutters>
+    <div v-for="(location, idx) in listado" :key="idx">
+      <pre>
+        <h1>{{ idx }}</h1>
+
+      </pre>
+    </div>
     <v-col>
       <v-card outlined :loading="loading" class="mx-auto my-3" max-width="374">
         <template slot="progress">
@@ -270,7 +276,9 @@
 </template>
 <script>
 import DetailItem from "@/components/dialogs/DetailItem.vue";
-import AccesorioDataService from "../services/AccesorioDataService";
+import firebase from "../firestoreConfig";
+const db = firebase.firestore();
+
 export default {
   data: () => ({
     loading: false,
@@ -294,9 +302,29 @@ export default {
     dialogClose(e) {
       this.showDetial = e;
     },
-    getAccesiorosAll() {
-      console.log("Listo para cargar todos los accesorios");
-      this.listado = AccesorioDataService.getAll();
+    async getAccesiorosAll() {
+      let products = [];
+      try {
+        this.listado = await db.collection("accesorios")
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              products.push({
+                id: doc.id,
+                name: doc.data().nombre || "Sin informacion",
+                color: doc.data().color || "Sin informacion",
+                marca: doc.data().marca || "Sin informacion",
+                precio: doc.data().precio || "Sin informacion",
+                status: doc.data().status || "Sin informacion",
+                promocion: doc.data().promocion || "Sin informacion"
+              });
+            });
+          });
+        // console.log(this.listado);
+      } catch (e) {
+        console.log("Existio un problema");
+      }
+      console.log("Estos son todos los objectos que esty trayendo ",products);
     }
   },
   components: {
