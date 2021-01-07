@@ -276,8 +276,9 @@
 </template>
 <script>
 import DetailItem from "@/components/dialogs/DetailItem.vue";
-import firebase from "../firestoreConfig";
-const db = firebase.firestore();
+
+// import firebase from "../firestoreConfig";
+// const db = firebase.firestore();
 
 export default {
   data: () => ({
@@ -302,29 +303,12 @@ export default {
     dialogClose(e) {
       this.showDetial = e;
     },
-    async getAccesiorosAll() {
-      let products = [];
+    getAccesiorosAll() {
       try {
-        this.listado = await db.collection("accesorios")
-          .get()
-          .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              products.push({
-                id: doc.id,
-                name: doc.data().nombre || "Sin informacion",
-                color: doc.data().color || "Sin informacion",
-                marca: doc.data().marca || "Sin informacion",
-                precio: doc.data().precio || "Sin informacion",
-                status: doc.data().status || "Sin informacion",
-                promocion: doc.data().promocion || "Sin informacion"
-              });
-            });
-          });
-        // console.log(this.listado);
+        this.$store.dispatch("products/load");
       } catch (e) {
-        console.log("Existio un problema");
+        console.log("Hay un error", e);
       }
-      console.log("Estos son todos los objectos que esty trayendo ",products);
     }
   },
   components: {
