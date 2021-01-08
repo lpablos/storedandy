@@ -5,11 +5,12 @@ export default {
   namespaced: true,
   state: {
     a: "Hola mundo",
-    producto: []
+    status: false,
+    productos: []
   },
   mutations: {
-    insertItem(state, payload){
-      state.producto.push(payload);
+    insertItem(state, payload) {
+      state.productos.push(payload);
     }
   },
   actions: {
@@ -18,7 +19,7 @@ export default {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            const item = {
+            var item = {
               id: doc.id,
               name: doc.data().nombre || "Sin informacion",
               color: doc.data().color || "Sin informacion",
