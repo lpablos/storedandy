@@ -8,7 +8,8 @@
         </template>
         <v-img
           height="250"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
+          :src="product.image"></v-img>
+          
         <v-card-title>{{product.name}} - {{ product.precio }}</v-card-title>
         <v-card-text>
           <div>

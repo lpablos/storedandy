@@ -26,7 +26,8 @@ export default {
               marca: doc.data().marca || "Sin informacion",
               precio: doc.data().precio || "Sin informacion",
               status: doc.data().status || "Sin informacion",
-              promocion: doc.data().promocion || "Sin informacion"
+              promocion: doc.data().promocion || "Sin informacion",
+              image: doc.data().image || "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png"
             };
             commit("insertItem", item);
           });
