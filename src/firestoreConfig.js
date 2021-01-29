@@ -6,6 +6,6 @@ const firebaseConfig = {
   projectId: "dandystore-5c606",
   storageBucket: "dandystore-5c606.appspot.com",
   messagingSenderId: "86103460820",
-  appId: "1:86103460820:web:c966672d9c2b193c876441"
+  appId: "1:86103460820:web:4f5554f63d717db5876441"
 };
 export default firebase.initializeApp(firebaseConfig);

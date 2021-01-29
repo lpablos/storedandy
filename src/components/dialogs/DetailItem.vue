@@ -1,26 +1,28 @@
 <template>
   <div class="text-center">
     <v-dialog transition="dialog-bottom-transition" :persistent="true" v-model="dialog" width="500">
-      <v-card class="mx-auto" max-width="500">
-        <v-carousel height="300">
-          <v-carousel-item
-            v-for="(item, i) in items"
-            :key="i"
-            :src="item.src"
-            reverse-transition="fade-transition"
-            transition="fade-transition"
-            height="300"
-          ></v-carousel-item>
-        </v-carousel>
+      <v-card class="mx-auto" max-width="500" v-if="detail">
+        <span v-show="Object.keys(detail.images).length > 0">
+          <v-carousel height="300">
+            <v-carousel-item
+              v-for="(item, i) in detail.images"
+              :key="i"
+              :src="item.image"
+              reverse-transition="fade-transition"
+              transition="fade-transition"
+              height="300"
+            ></v-carousel-item>
+          </v-carousel>
+        </span>
         <v-card-title>
-          Cafe Badilico
+          {{ detail.name }}
         </v-card-title>
         <v-card-text>
           <div class="my-4 subtitle-1">
-            $15.00 MXN
+            {{ detail.precio }}
           </div>
           <div>
-            Small plates salads & sandwiches an intimate setting with seats plus patio seating
+            Modelo {{ detail.name }} marca {{ detail.marca }} color {{ detail.color }}
           </div>
         </v-card-text>
         <v-divider class="mx-4"></v-divider>
@@ -37,33 +39,30 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
-      items: [
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg"
-        },
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
-        },
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg"
-        },
-        {
-          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg"
-        }
-      ]
+  computed: {
+    ...mapGetters({ asocImages: "products/imagenes" }),
+    detail: function() {
+      return this.asocImages(this.identy);
     }
   },
   props: {
     dialog: {
       default: false
-    }
+    },
+    identy: null
   },
   methods: {
-    closeDialog(){
+    closeDialog() {
       this.$emit("dialog-close", false);
+    },
+    ...mapActions({ moreInf: "products/loadImagesItem" })
+  },
+  watch: {
+    identy: function(identy) {
+      this.moreInf(identy);
     }
   }
 };

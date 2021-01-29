@@ -44,7 +44,10 @@
           </div>
           <v-divider class="mx-2"></v-divider>
           <v-card-actions class="justify-center">
-            <v-btn color="deep-purple lighten-2" text @click="showDetialInfo">
+            <v-btn
+              color="deep-purple lighten-2"
+              @click="showDetialInfo(product.id)"
+            >
               <i class="fas fa-search-plus"></i> Detalle
             </v-btn>
             <v-btn color="deep-purple lighten-2" text @click="reserve">
@@ -55,7 +58,11 @@
       </v-card>
     </v-col>
 
-    <detail-item :dialog="showDetial" @dialog-close="dialogClose" />
+    <detail-item
+      :dialog="showDetial"
+      :identy="itemDetalle"
+      @dialog-close="dialogClose"
+    />
   </v-row>
 </template>
 <script>
@@ -68,7 +75,8 @@ export default {
     selection: 1,
     items: 3,
     showDetial: false,
-    listado: null
+    listado: null,
+    itemDetalle: null
   }),
   created: function() {
     this.getAccesiorosAll();
@@ -78,7 +86,8 @@ export default {
       this.loading = true;
       setTimeout(() => (this.loading = false), 2000);
     },
-    showDetialInfo() {
+    showDetialInfo(identy) {
+      this.itemDetalle = identy;
       this.reserve();
       this.showDetial = true;
     },
@@ -95,7 +104,7 @@ export default {
   },
   computed: {
     ...mapState({
-      productos: (state) => state.products.productos
+      productos: state => state.products.productos
     }),
     totalProductos() {
       return this.productos.lenght || "0";
