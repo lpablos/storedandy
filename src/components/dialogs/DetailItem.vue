@@ -62,7 +62,10 @@ export default {
   },
   watch: {
     identy: function(identy) {
-      this.moreInf(identy);
+      if (Object.keys(this.detail.images).length == 0) {
+        console.log("Entras en la busqueda");
+        this.moreInf(identy);
+      }
     }
   }
 };
