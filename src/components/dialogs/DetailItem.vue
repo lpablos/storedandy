@@ -27,7 +27,7 @@
         </v-card-text>
         <v-divider class="mx-4"></v-divider>
         <v-card-actions class="justify-center">
-          <v-btn color="primary" text @click="closeDialog()">
+          <v-btn color="primary" text @click="addCart(detail)">
             Agregar
           </v-btn>
           <v-btn color="primary" text @click="closeDialog()">
@@ -58,7 +58,10 @@ export default {
     closeDialog() {
       this.$emit("dialog-close", false);
     },
-    ...mapActions({ moreInf: "products/loadImagesItem" })
+    ...mapActions({
+      moreInf: "products/loadImagesItem",
+      addCart: "cart/addItemCart"
+    })
   },
   watch: {
     identy: function(identy) {
