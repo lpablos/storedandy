@@ -9,7 +9,13 @@ export default {
   },
   getters:{
     getItemsCart: state => {
-      return state.cart.forEach();
+      return state.cart.length;
+    },
+    getTotalCart: state => {
+      return state.cart.reduce((total, item) => {
+        var suma = item.price * item.cantidad;
+        return total + suma;
+      });
     }
   },
   mutations: {

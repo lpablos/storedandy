@@ -26,7 +26,36 @@
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <v-card class="mb-12" color="grey lighten-1" height="200px">
+              <v-card class="mb-12" height="200px">
+                <v-simple-table dense>
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">
+                          Producto
+                        </th>
+                        <th class="text-left">
+                          Cantidad
+                        </th>
+                        <th class="text-left">
+                          Precio
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in itemsCart" :key="item.id">
+                        <td>{{ item.product }}</td>
+                        <td>{{ item.cantidad }}</td>
+                        <td>{{ item.price }}</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>Total</td>
+                        <td>$ {{totalItems}}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
               </v-card>
               <v-divider></v-divider>
               <v-btn color="primary" @click="e1 = 2">
@@ -70,6 +99,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "DetailCar",
   data() {
@@ -82,6 +112,10 @@ export default {
       default: true,
       e1: 2
     }
+  },
+  computed: {
+    ...mapState({ itemsCart: state => state.cart.cart }),
+    ...mapGetters({ totalItems: "cart/getTotalCart" })
   }
 };
 </script>
