@@ -51,7 +51,7 @@
                       <tr>
                         <td></td>
                         <td>Total</td>
-                        <td>$ {{totalItems}}</td>
+                        <td>$ {{ totalItems }}</td>
                       </tr>
                     </tbody>
                   </template>

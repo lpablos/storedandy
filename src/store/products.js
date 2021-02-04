@@ -31,7 +31,7 @@ export default {
                 image: doc.data().imagen
               };
               state.productos[index].images.push(image);
-              console.log("Este es el valor", state.productos[index].images);
+              // console.log("Este es el valor", state.productos[index].images);
             });
           });
       } catch (e) {
@@ -45,12 +45,14 @@ export default {
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
+            console.log(doc.data().price);
             var item = {
               id: doc.id,
               name: doc.data().nombre || "Sin informacion",
               color: doc.data().color || "Sin informacion",
               marca: doc.data().marca || "Sin informacion",
               precio: doc.data().precio || "Sin informacion",
+              precioItem: doc.data().price,
               status: doc.data().status || "Sin informacion",
               promocion: doc.data().promocion || "Sin informacion",
               image: doc.data().image ||

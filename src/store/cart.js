@@ -12,8 +12,15 @@ export default {
       return state.cart.length;
     },
     getTotalCart: state => {
+      console.log("Dentro de la funcion", state.cart);
       return state.cart.reduce((total, item) => {
-        var suma = item.price * item.cantidad;
+        console.log(
+          "este es el precio",
+          item.priceItem,
+          "Esta es la cantidad",
+          item.cantidad
+        );
+        var suma = item.priceItem * item.cantidad;
         return total + suma;
       });
     }
@@ -23,6 +30,7 @@ export default {
       state.banners.push(payload);
     },
     addItem(state, payload) {
+      console.log(payload);
       var item = state.cart.find(item => item.id === payload.id);
       if (item) {
         item.cantidad = item.cantidad + 1;
@@ -31,11 +39,12 @@ export default {
           id: payload.id,
           product: payload.marca + " " + payload.name,
           price: payload.precio,
+          priceItem: payload.precioItem,
           cantidad: 1
         };
         state.cart.push(load);
       }
-      console.log(state.cart);
+      // console.log(state.cart);
     }
   },
   actions: {
@@ -46,8 +55,10 @@ export default {
           querySnapshot.forEach(doc => {
             var item = {
               id: doc.id,
-              description: doc.data().description,             
-              image: doc.data().image || "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
+              description: doc.data().description,
+              image:
+                doc.data().image ||
+                "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
               name: doc.data().name || "Sin informacion",
             };
             commit("insertBanner", item);

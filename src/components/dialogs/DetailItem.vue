@@ -66,7 +66,6 @@ export default {
   watch: {
     identy: function(identy) {
       if (Object.keys(this.detail.images).length == 0) {
-        console.log("Entras en la busqueda");
         this.moreInf(identy);
       }
     }
