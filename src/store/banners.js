@@ -21,9 +21,11 @@ export default {
           querySnapshot.forEach(doc => {
             var item = {
               id: doc.id,
-              description: doc.data().description,             
-              image: doc.data().image || "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
-              name: doc.data().name || "Sin informacion",
+              description: doc.data().description,
+              image:
+                doc.data().image ||
+                "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
+              name: doc.data().name || "Sin informacion"
             };
             commit("insertBanner", item);
           });

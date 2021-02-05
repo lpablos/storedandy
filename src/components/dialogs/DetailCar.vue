@@ -51,7 +51,7 @@
                       <tr>
                         <td></td>
                         <td>Total</td>
-                        <td>$ {{ totalItems }}</td>
+                        <td>$ {{ totalItems }} MXN</td>
                       </tr>
                     </tbody>
                   </template>
@@ -105,7 +105,7 @@ export default {
   data() {
     return {
       e1: 1
-    }
+    };
   },
   props: {
     show: {

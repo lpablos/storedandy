@@ -7,22 +7,21 @@ export default {
     a: "Carrito de compras",
     cart: []
   },
-  getters:{
+  getters: {
     getItemsCart: state => {
       return state.cart.length;
     },
     getTotalCart: state => {
-      console.log("Dentro de la funcion", state.cart);
-      return state.cart.reduce((total, item) => {
-        console.log(
-          "este es el precio",
-          item.priceItem,
-          "Esta es la cantidad",
-          item.cantidad
-        );
-        var suma = item.priceItem * item.cantidad;
-        return total + suma;
-      });
+      if (state.cart.length > 0) {
+        var sumatoria = 0;
+        state.cart.forEach(item => {
+          sumatoria += item.priceItem * item.cantidad;
+        });
+        return sumatoria;
+      } else {
+        console.log("no cumple ");
+        return 0;
+      }
     }
   },
   mutations: {
@@ -44,7 +43,6 @@ export default {
         };
         state.cart.push(load);
       }
-      // console.log(state.cart);
     }
   },
   actions: {
@@ -59,7 +57,7 @@ export default {
               image:
                 doc.data().image ||
                 "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
-              name: doc.data().name || "Sin informacion",
+              name: doc.data().name || "Sin informacion"
             };
             commit("insertBanner", item);
           });
