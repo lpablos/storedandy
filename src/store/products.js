@@ -22,9 +22,10 @@ export default {
         var index = await state.productos
           .map(product => product.id)
           .indexOf(payload);
-        await db.collection("accesorios/" + payload + "/images")
+        await db
+          .collection("accesorios/" + payload + "/images")
           .get()
-          .then((query) => {
+          .then(query => {
             query.forEach(doc => {
               var image = {
                 id: doc.id,
@@ -55,8 +56,9 @@ export default {
               precioItem: doc.data().price,
               status: doc.data().status || "Sin informacion",
               promocion: doc.data().promocion || "Sin informacion",
-              image: doc.data().image ||
-               "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
+              image:
+                doc.data().image ||
+                "https://streetspotr.com/wp-content/uploads/2017/08/Out-of-Stock_Titelbild.png",
               images: []
             };
             commit("insertItem", item);

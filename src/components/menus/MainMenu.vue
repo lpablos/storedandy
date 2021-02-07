@@ -26,6 +26,7 @@
 </template>
 <script>
 import OrderDetail from "../OrderDetail.vue";
+
 export default {
   name: "MainMenu",
   components: {
