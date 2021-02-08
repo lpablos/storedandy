@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-12" height="200px">
+  <v-card class="mb-12" height="300px">
     <v-simple-table dense>
       <template v-slot:default>
         <thead>
