@@ -14,7 +14,7 @@
             <v-divider></v-divider>
 
             <v-stepper-step :complete="e1 > 2" step="2">
-              Mis datos
+              Contacto y entrega
             </v-stepper-step>
 
             <v-divider></v-divider>
@@ -26,32 +26,37 @@
 
           <v-stepper-items>
             <v-stepper-content step="1">
-              <items-cart />
+              <v-card class="mb-12" height="300px">
+                <items-cart />
+              </v-card>
               <!-- <v-divider></v-divider> -->
-              <v-btn color="primary" @click="e1 = 2">
-                Mis Datos
-              </v-btn>
+              <v-row align="center" justify="space-around">
+                <v-btn text color="primary" @click="e1 = 2">
+                  Continuar
+                </v-btn>
 
-              <v-btn text class="float-right">
-                Cerrar
-              </v-btn>
+                <v-btn text class="float-right">
+                  Cerrar
+                </v-btn>
+              </v-row>
             </v-stepper-content>
 
             <v-stepper-content step="2">
               <v-card class="mb-12" height="300px">
                 <buyer-data />
               </v-card>
-              <v-divider></v-divider>
-              <v-btn color="primary" @click="e1 = 3">
-                Confirmar compra
-              </v-btn>
-              <v-btn color="primary" @click="e1 = 1">
-                Mi pedido
-              </v-btn>
-
-              <v-btn text class="float-right">
-                Cerrar
-              </v-btn>
+              <!-- <v-divider></v-divider> -->
+              <v-row align="center" justify="space-around">
+                <v-btn text color="primary" @click="e1 = 3">
+                  Continuar
+                </v-btn>
+                <v-btn text color="primary" @click="e1 = 1">
+                  volver
+                </v-btn>
+                <v-btn text class="float-right">
+                  Cerrar
+                </v-btn>
+              </v-row>
             </v-stepper-content>
 
             <v-stepper-content step="3">

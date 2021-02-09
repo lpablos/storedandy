@@ -1,29 +1,27 @@
 <template>
-  <v-card class="mb-12" height="300px">
-    <v-simple-table dense>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Producto</th>
-            <th class="text-left">Cantidad</th>
-            <th class="text-left">Precio</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in itemsCart" :key="item.id">
-            <td>{{ item.product }}</td>
-            <td>{{ item.cantidad }}</td>
-            <td>{{ item.price }}</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>Total</td>
-            <td>$ {{ totalItems }} MXN</td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
-  </v-card>
+  <v-simple-table dense>
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">Producto</th>
+          <th class="text-left">Cantidad</th>
+          <th class="text-left">Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in itemsCart" :key="item.id">
+          <td>{{ item.product }}</td>
+          <td>{{ item.cantidad }}</td>
+          <td>{{ item.price }}</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Total</td>
+          <td>$ {{ totalItems }} MXN</td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
 </template>
 <script>
 import { mapGetters, mapState } from "vuex";

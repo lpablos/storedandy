@@ -40,28 +40,19 @@
           <v-text-field
             v-model="referencia"
             :rules="nameRules"
-            label="Referencia del lugar a convenir"
+            label="Referencia breve"
             required
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4">
           <v-select :items="horaEntrega" label="Horario disponible"></v-select>
         </v-col>
-        <v-col cols="12" md="4">
-          <v-text-field
-            v-model="tikecVenta"
-            :rules="nameRules"
-            :counter="15"
-            label="Total a pagar"
-            required
-          ></v-text-field>
-        </v-col>
       </v-row>
     </v-container>
   </v-form>
 </template>
-
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "BuyerData",
   data: () => ({
@@ -77,6 +68,7 @@ export default {
       "Plaza Museo",
       "Plaza Cristal"
     ],
+    isDisabled: true,
     horaEntrega: ["17:00 hrs", "18:00 hrs", "19:00 hrs", "20:00 hrs"],
     nameRules: [
       v => !!v || "Name is required",
@@ -91,6 +83,9 @@ export default {
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ]
-  })
+  }),
+  computed: {
+    ...mapGetters({ venta: "cart/getTotalCart" })
+  }
 };
 </script>
