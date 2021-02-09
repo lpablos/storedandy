@@ -43,11 +43,11 @@
 
             <v-stepper-content step="2">
               <v-card class="mb-12" height="300px">
-                <buyer-data />
+                <buyer-data :expedicion="encargo" />
               </v-card>
               <!-- <v-divider></v-divider> -->
               <v-row align="center" justify="space-around">
-                <v-btn text color="primary" @click="e1 = 3">
+                <v-btn text color="primary" @click="actionSend">
                   Continuar
                 </v-btn>
                 <v-btn text color="primary" @click="e1 = 1">
@@ -84,13 +84,20 @@ export default {
   name: "DetailCar",
   data() {
     return {
-      e1: 1
+      e1: 1,
+      encargo: false
     };
   },
   props: {
     show: {
       default: true,
       e1: 2
+    }
+  },
+  methods: {
+    actionSend() {
+      this.e1 = 3;
+      this.encargo = true;
     }
   },
   components: {
