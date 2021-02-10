@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid">
+  <v-form v-model="valid" ref="form" @submit="submited">
     <v-container>
       <v-row>
         <v-col cols="12" md="4">
@@ -76,12 +76,22 @@ export default {
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
       ]
-    }
+    };
   },
   props: ["expedicion"],
   watch: {
     expedicion() {
-      alert("Quieres enviarlos?");
+      this.addOrder();
+    }
+  },
+  methods: {
+    addOrder() {
+      alert("Llamadas al fomulario para enviarlo");
+      this.$refs.form.$el.submit();
+    },
+    submited(event) {
+      event.preventDefault();
+      alert("Intento de envio de formulario");
     }
   },
   computed: {
