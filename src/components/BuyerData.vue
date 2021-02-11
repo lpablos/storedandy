@@ -45,7 +45,7 @@
   </v-form>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapState, mapGetters } from "vuex";
 export default {
   name: "BuyerData",
   data() {
@@ -83,14 +83,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ addItemsOrder: "pedidos/addOrder"}),
+    ...mapActions({ addItemsOrder: "pedidos/addOrder" }),
     addOrder() {
-      alert("Llamadas al fomulario para enviarlo");
-      this.addItemsOrder();
+      this.addItemsOrder({
+        contacto: this.form,
+        pedido: this.pedido,
+        total: this.totalItems
+      });
     }
   },
   computed: {
-    ...mapGetters({ venta: "cart/getTotalCart" })
+    ...mapState({ pedido: state => state.cart.cart }),
+    ...mapGetters({ totalItems: "cart/getTotalCart" })
   }
 };
 </script>

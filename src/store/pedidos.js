@@ -12,16 +12,30 @@ export default {
     // insertBanner(state, payload) {
     //   state.banners.push(payload);
     // }
+    nuevoPedido(){
+      console.log("Has añadido el pedido enf firebase");
+    }
   },
   actions: {
-    addOrder() {
-      db.collection("cities")
+    async addOrder({ commit }, payload) {
+      console.log("Esto es lo recibido", payload.contacto);
+      db.collection("pedidos")
         .doc()
         .set({
-          name: "Los Angeles",
-          state: "CA",
-          country: "USA"
+          conctacto: payload.contacto,
+          productos: payload.pedido,
+          total: payload.total
+        })
+        // .then(data =>{
+        //   // data.doc.forEach(inf =>{
+        //   //   console.log("Dentro de firebase ", inf);
+        //   // });
+        // })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
         });
+      // console.log("Esta es la orden", orderNow.id);
+      commit("nuevoPedido");
       // db.collection("banners")
       //   .get()
       //   .then(querySnapshot => {
