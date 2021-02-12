@@ -86,6 +86,8 @@ export default {
     ...mapActions({ addItemsOrder: "pedidos/addOrder" }),
     addOrder() {
       this.addItemsOrder({
+        activo: true,
+        status: "Para entrega",
         contacto: this.form,
         pedido: this.pedido,
         total: this.totalItems
