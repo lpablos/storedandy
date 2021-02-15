@@ -61,6 +61,7 @@
 
             <v-stepper-content step="3">
               <v-card class="mb-12" color="grey lighten-1" height="300px">
+                <pay-order />
               </v-card>
               <v-divider></v-divider>
               <v-btn color="primary" @click="e1 = 1">
@@ -80,6 +81,7 @@
 <script>
 import ItemsCart from "../ItemsCart.vue";
 import BuyerData from "../BuyerData.vue";
+import PayOrder from "../PayOrder.vue";
 export default {
   name: "DetailCar",
   data() {
@@ -102,7 +104,8 @@ export default {
   },
   components: {
     ItemsCart,
-    BuyerData
+    BuyerData,
+    PayOrder
   }
 };
 </script>

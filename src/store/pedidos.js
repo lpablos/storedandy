@@ -6,16 +6,13 @@ export default {
   state: {
     a: "Store de pedidos",
     status: false,
-    pedidos: [],
+    pedido: null,
     error: null
   },
   mutations: {
-    // insertBanner(state, payload) {
-    //   state.banners.push(payload);
-    // }
     nuevoPedido(state, newPayload){
-      state.pedidos.push(newPayload);
-      console.log("Esta es la carga", state.pedidos);
+      state.pedido = newPayload;
+      console.log(state.pedido);
     }
   },
   actions: {
