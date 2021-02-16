@@ -43,6 +43,9 @@ export default {
         };
         state.cart.push(load);
       }
+    },
+    resetCart(state) {
+      state.cart = [];
     }
   },
   actions: {
@@ -63,6 +66,7 @@ export default {
           });
         });
     },
-    addItemCart: ({ commit }, products) => commit("addItem", products)
+    addItemCart: ({ commit }, products) => commit("addItem", products),
+    resetItemsIncart: ({ commit }) => commit("resetCart")
   }
 };

@@ -35,7 +35,7 @@
                   Continuar
                 </v-btn>
 
-                <v-btn text class="float-right">
+                <v-btn text class="float-right" @click="closeDetail">
                   Cerrar
                 </v-btn>
               </v-row>
@@ -48,12 +48,12 @@
               <!-- <v-divider></v-divider> -->
               <v-row align="center" justify="space-around">
                 <v-btn text color="primary" @click="actionSend">
-                  Continuar
+                  Confirmar Compra
                 </v-btn>
                 <v-btn text color="primary" @click="e1 = 1">
                   volver
                 </v-btn>
-                <v-btn text class="float-right">
+                <v-btn text class="float-right" @click="closeDetail">
                   Cerrar
                 </v-btn>
               </v-row>
@@ -64,12 +64,8 @@
                 <pay-order />
               </v-card>
               <v-divider></v-divider>
-              <v-btn color="primary" @click="e1 = 1">
+              <v-btn color="primary" @click="finshOrder" class="float-right">
                 Finalizar
-              </v-btn>
-
-              <v-btn text class="float-right">
-                Cerrar
               </v-btn>
             </v-stepper-content>
           </v-stepper-items>
@@ -82,6 +78,7 @@
 import ItemsCart from "../ItemsCart.vue";
 import BuyerData from "../BuyerData.vue";
 import PayOrder from "../PayOrder.vue";
+import { mapActions } from "vuex"
 export default {
   name: "DetailCar",
   data() {
@@ -100,6 +97,18 @@ export default {
     actionSend() {
       this.e1 = 3;
       this.encargo = true;
+    },
+    closeDetail() {
+      this.$emit("closeDetailCart", false);
+    },
+    ...mapActions({
+      clearCart: "cart/resetItemsIncart",
+      clearPedido: "pedidos/resetOrder"
+    }),
+    finshOrder() {
+      this.clearCart();
+      this.clearPedido();
+      this.e1 = 1;
     }
   },
   components: {

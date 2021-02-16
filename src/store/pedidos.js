@@ -13,6 +13,11 @@ export default {
     nuevoPedido(state, newPayload){
       state.pedido = newPayload;
       console.log(state.pedido);
+    },
+    resetPedido(state){
+      state.pedido = null;
+      state.error = null;
+      state.status = false;
     }
   },
   actions: {
@@ -35,6 +40,7 @@ export default {
         .catch(function(error) {
           console.error("Error writing document: ", error);
         });
-    }
+    },
+    resetOrder: ({ commit }) => commit("resetPedido")
   }
 };
