@@ -38,7 +38,12 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4">
-          <v-select :items="horaEntrega" label="Horario entregas"></v-select>
+          <v-select
+          :items="horarios"
+          item-value="id"
+          item-text="horario"
+          label="Horario entregas"
+          ></v-select>
         </v-col>
       </v-row>
     </v-container>
@@ -82,8 +87,14 @@ export default {
       this.addOrder();
     }
   },
+  created: function(){
+    this.getSchedules();
+  },
   methods: {
-    ...mapActions({ addItemsOrder: "pedidos/addOrder" }),
+    ...mapActions({
+      addItemsOrder: "pedidos/addOrder",
+      getSchedules: "pedidos/getSchedules"
+    }),
     addOrder() {
       this.addItemsOrder({
         activo: true,
@@ -95,7 +106,10 @@ export default {
     }
   },
   computed: {
-    ...mapState({ pedido: state => state.cart.cart }),
+    ...mapState({
+      pedido: state => state.cart.cart,
+      horarios: state => state.cart.horarios
+    }),
     ...mapGetters({ totalItems: "cart/getTotalCart" })
   }
 };

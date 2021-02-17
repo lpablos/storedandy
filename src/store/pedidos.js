@@ -7,17 +7,20 @@ export default {
     a: "Store de pedidos",
     status: false,
     pedido: null,
-    error: null
+    error: null,
+    horarios: []
   },
   mutations: {
     nuevoPedido(state, newPayload){
       state.pedido = newPayload;
-      console.log(state.pedido);
     },
     resetPedido(state){
       state.pedido = null;
       state.error = null;
       state.status = false;
+    },
+    setHorarios(state, newPayload){
+      state.horarios.push(newPayload);
     }
   },
   actions: {
@@ -41,6 +44,19 @@ export default {
           console.error("Error writing document: ", error);
         });
     },
-    resetOrder: ({ commit }) => commit("resetPedido")
+    resetOrder: ({ commit }) => commit("resetPedido"),
+    getSchedules({ commit }) {
+      db.collection("horario entregas")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            var item = {
+              id: doc.id,
+              horario: doc.data().disponibilidad
+            };
+            commit("setHorarios", item);
+          });
+        });
+    } 
   }
 };
