@@ -8,7 +8,8 @@ export default {
     status: false,
     pedido: null,
     error: null,
-    horarios: []
+    horarios: [],
+    citios: []
   },
   mutations: {
     nuevoPedido(state, newPayload){
@@ -18,9 +19,14 @@ export default {
       state.pedido = null;
       state.error = null;
       state.status = false;
+      state.horarios = [];
+      state.citios = [];
     },
     setHorarios(state, newPayload){
       state.horarios.push(newPayload);
+    },
+    setDeliveryPoint(state, newPayload){
+      state.citios.push(newPayload);
     }
   },
   actions: {
@@ -46,17 +52,30 @@ export default {
     },
     resetOrder: ({ commit }) => commit("resetPedido"),
     getSchedules({ commit }) {
-      db.collection("horario entregas")
+      db.collection("Cat Horarios")
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
             var item = {
               id: doc.id,
-              horario: doc.data().disponibilidad
+              horario: doc.data().horario
             };
             commit("setHorarios", item);
           });
         });
-    } 
+    },
+    getDeliveryPoints({ commit }){
+      db.collection("Cat Puntos Entrega")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            var item = {
+              id: doc.id,
+              citio: doc.data().citio
+            };
+            commit("setDeliveryPoint", item);
+          });
+        });
+    }
   }
 };

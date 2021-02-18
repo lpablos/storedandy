@@ -27,7 +27,16 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4">
-          <v-select :items="puntosEntrega" label="Punto de entrega"></v-select>
+          <v-select
+            v-model="form.citio"
+            :items="citios"
+            item-text="citio"
+            item-value="id"
+            label="Citio de entreha"
+            persistent-hint
+            return-object
+            single-line
+          ></v-select>
         </v-col>
         <v-col cols="12" md="4">
           <v-text-field
@@ -39,11 +48,44 @@
         </v-col>
         <v-col cols="12" md="4">
           <v-select
-          :items="horarios"
-          item-value="id"
-          item-text="horario"
-          label="Horario entregas"
+            v-model="form.horario"
+            :items="horarios"
+            item-text="horario"
+            item-value="id"
+            label="Horario de entrega"
+            persistent-hint
+            return-object
+            single-line
           ></v-select>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-dialog
+            ref="dialog"
+            v-model="modal"
+            :return-value.sync="date"
+            persistent
+            width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="form.date"
+                label="Fecha de entrega"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="date" scrollable>
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" @click="modal = false">
+                Cancelar
+              </v-btn>
+              <v-btn text color="primary" @click="$refs.dialog.save(date)">
+                Selecionar
+              </v-btn>
+            </v-date-picker>
+          </v-dialog>
         </v-col>
       </v-row>
     </v-container>
@@ -60,7 +102,10 @@ export default {
         name: "Luis Jorge",
         phoneNumber: "2281060593",
         email: "lpablo@hotmail.com",
-        referencia: "La Dauzon"
+        referencia: "La Dauzon",
+        horario: null,
+        citio: null,
+        date: new Date().toISOString().substr(0, 10)
       },
       tikecVenta: "$130",
       puntosEntrega: [
@@ -78,7 +123,11 @@ export default {
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
-      ]
+      ],
+      date: new Date().toISOString().substr(0, 10),
+      menu: false,
+      modal: false,
+      menu2: false
     };
   },
   props: ["expedicion"],
@@ -89,11 +138,13 @@ export default {
   },
   created: function(){
     this.getSchedules();
+    this.getDeliveryPoints();
   },
   methods: {
     ...mapActions({
       addItemsOrder: "pedidos/addOrder",
-      getSchedules: "pedidos/getSchedules"
+      getSchedules: "pedidos/getSchedules",
+      getDeliveryPoints: "pedidos/getDeliveryPoints"
     }),
     addOrder() {
       this.addItemsOrder({
@@ -108,7 +159,8 @@ export default {
   computed: {
     ...mapState({
       pedido: state => state.cart.cart,
-      horarios: state => state.cart.horarios
+      horarios: state => state.pedidos.horarios,
+      citios: state => state.pedidos.citios
     }),
     ...mapGetters({ totalItems: "cart/getTotalCart" })
   }
