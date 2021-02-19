@@ -62,13 +62,13 @@
           <v-dialog
             ref="dialog"
             v-model="modal"
-            :return-value.sync="date"
+            :return-value.sync="form.fecha"
             persistent
             width="290px"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="form.date"
+                v-model="form.fecha"
                 label="Fecha de entrega"
                 prepend-icon="mdi-calendar"
                 readonly
@@ -76,12 +76,12 @@
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="date" scrollable>
+            <v-date-picker v-model="form.date" scrollable>
               <v-spacer></v-spacer>
               <v-btn text color="primary" @click="modal = false">
                 Cancelar
               </v-btn>
-              <v-btn text color="primary" @click="$refs.dialog.save(date)">
+              <v-btn text color="primary" @click="$refs.dialog.save(form.date)">
                 Selecionar
               </v-btn>
             </v-date-picker>
@@ -97,7 +97,6 @@ export default {
   name: "BuyerData",
   data() {
     return {
-      valid: false,
       form: {
         name: "Luis Jorge",
         phoneNumber: "2281060593",
@@ -105,17 +104,9 @@ export default {
         referencia: "La Dauzon",
         horario: null,
         citio: null,
-        date: new Date().toISOString().substr(0, 10)
+        fecha: new Date().toISOString().substr(0, 10)
       },
-      tikecVenta: "$130",
-      puntosEntrega: [
-        "Plaza Americas",
-        "Plaza Animas",
-        "Plaza Museo",
-        "Plaza Cristal"
-      ],
       isDisabled: true,
-      horaEntrega: ["17:00 hrs", "18:00 hrs", "19:00 hrs", "20:00 hrs"],
       nameRules: [
         v => !!v || "Name is required",
         v => v.length <= 15 || "Name must be less than 10 characters"
@@ -124,7 +115,7 @@ export default {
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
       ],
-      date: new Date().toISOString().substr(0, 10),
+      valid: false,
       menu: false,
       modal: false,
       menu2: false

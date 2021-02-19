@@ -20,7 +20,13 @@
           <tr>
             <td>Entrega</td>
             <td>
-              Lunes 10 Marzao a las 18:00 en Plaza Americas
+              Citio de entrega
+              {{ pedido.conctacto.citio.citio }}
+              , referencia
+              {{ pedido.conctacto.referencia }}
+              , el dia
+              {{ pedido.conctacto.fecha }}
+              , en horario {{ pedido.conctacto.horario.horario }}
             </td>
           </tr>
         </tbody>
