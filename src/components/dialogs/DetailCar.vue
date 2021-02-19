@@ -109,6 +109,7 @@ export default {
       this.clearCart();
       this.clearPedido();
       this.e1 = 1;
+      this.closeDetail();
     }
   },
   components: {
