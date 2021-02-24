@@ -1,14 +1,13 @@
 <template>
   <div>
     <main-menu />
-    <div class="about">
-      <h1>Hola mundo</h1>
+    <div class="login">
+      <h1>Aqui estara el login</h1>
     </div>
   </div>
 </template>
 <script>
-
 export default {
-  name: "About"
+  name: "Login"
 };
 </script>

@@ -1,22 +1,23 @@
 <template>
   <v-app>
-    <main-menu />
+    <!-- <main-menu />
     <v-main>
       <HelloWorld />
-    </v-main>
+    </v-main> -->
+    <router-view />
   </v-app>
 </template>
 
 <script>
-import MainMenu from "./components/menus/MainMenu.vue";
-import HelloWorld from "./components/HelloWorld";
+// import MainMenu from "./components/menus/MainMenu.vue";
+// import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld,
-    MainMenu
+    // HelloWorld,
+    // MainMenu
   },
 
   data: () => ({
