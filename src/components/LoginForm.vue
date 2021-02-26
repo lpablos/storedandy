@@ -3,7 +3,7 @@
     <v-card-title>
       <span class="title font-weight justify-center">Danndy Store</span>
     </v-card-title>
-    <v-card-text class="headline font-weight-bold">
+    <v-card-text class="headline">
       <v-text-field
         v-model="email"
         :rules="emailRules"

@@ -1,8 +1,8 @@
 <template>
-  <v-container class="grey lighten-5">
-    <v-row no-gutters>
+  <v-container class="grey lighten-5" fill-height fluid>
+    <v-row align="center" justify="center">
       <v-col cols="2" sm="4">
-        <v-card class="pa-2 " outlined tile>
+        <v-card class="pa-2 " outlined tile elevation="10">
           <login-form />
         </v-card>
       </v-col>
