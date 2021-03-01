@@ -1,18 +1,23 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form
+    ref="form"
+    @submit.prevent="loginInfo"
+    v-model="form.valid"
+    lazy-validation
+  >
     <v-card-title>
       <span class="title font-weight justify-center">Danndy Store</span>
     </v-card-title>
     <v-card-text class="headline">
       <v-text-field
-        v-model="email"
+        v-model="form.email"
         :rules="emailRules"
         label="E-mail"
         required
       ></v-text-field>
 
       <v-text-field
-        v-model="key"
+        v-model="form.key"
         type="password"
         :counter="10"
         label="Contraseña"
@@ -21,7 +26,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="green" dark depressed>
+      <v-btn color="green" dark depressed type="submit">
         Iniciar Sessión
       </v-btn>
     </v-card-actions>
@@ -34,9 +39,13 @@ export default {
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+\..+/.test(v) || "E-mail must be valid",
-    ]
+    ],
+    form: {
+      email: "",
+      key: "",
+      valid: true
+    }
   }),
-  props: ["email", "key", "valid"],
   methods: {
     validate() {
       this.$refs.form.validate()
@@ -46,6 +55,9 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation()
+    },
+    loginInfo() {
+      this.$emit("infoLogin", this.form);
     }
   }
 };
