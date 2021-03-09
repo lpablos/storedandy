@@ -35,28 +35,6 @@ export default {
     }
   },
   actions: {
-    // logearse({ commit }, user) {
-    //   auth
-    //     .createUserWithEmailAndPassword(user.email, user.key)
-    //     .then(user => {
-    //       if (user) {
-    //         commit("SET_USER", {
-    //           displayName: user.displayName,
-    //           email: user.email
-    //         });
-    //         commit("SET_STATUS", 1);
-    //       } else {
-    //         commit("SET_USER", null);
-    //         commit("SET_STATUS", 2);
-    //       }
-    //     })
-    //     .catch(error => {
-    //       var errorCode = error.code;
-    //       var errorMessage = error.message;
-    //       console.log(errorCode, errorMessage);
-    //       commit("SET_STATUS", 2);
-    //     });
-    // }
     fetchUser({ commit }, user) {
       console.log("credenciales", user);
       auth
