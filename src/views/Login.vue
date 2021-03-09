@@ -11,25 +11,30 @@
 </template>
 <script>
 import LoginForm from "@/components/LoginForm.vue";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import router from "../router/index";
+
 export default {
   name: "Login",
-  // data() {
-  //   return {
-  //     form: {
-  //       email: "lpablo@hotmail.com",
-  //       key: "",
-  //       valid: true
-  //     }
-  //   };
-  // },
   methods: {
     registra(form) {
-      this.logeame(form);
+      this.session(form);
     },
     ...mapActions({
-      logeame: "login/logeo"
+      session: "login/fetchUser"
     })
+  },
+  computed: {
+    ...mapGetters({
+      loginStatus: "login/loginStatus"
+    })
+  },
+  watch: {
+    loginStatus: value => {
+      value
+        ? router.replace({ name: "Admin" })
+        : router.replace({ name: "Login" });
+    }
   },
   components: {
     LoginForm

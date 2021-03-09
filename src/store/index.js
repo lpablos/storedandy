@@ -4,8 +4,7 @@ import products from "./products";
 import banners from "./banners";
 import cart from "./cart";
 import pedidos from "./pedidos";
-import login from "./login"
-
+import login from "./login";
 
 Vue.use(Vuex);
 

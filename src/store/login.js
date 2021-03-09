@@ -5,70 +5,79 @@ const auth = firebase.auth();
 export default {
   namespaced: true,
   state: {
-    // a: "Carrito de compras",
-    // cart: []
+    user: {
+      loggedIn: false,
+      data: null,
+      success: 0, // 1.Login 2. Fail 0. Nada
+      message: ""
+    }
   },
   getters: {
-    // getItemsCart: state => {
-    //   return state.cart.length;
-    // },
-    // getTotalCart: state => {
-    //   if (state.cart.length > 0) {
-    //     var sumatoria = 0;
-    //     state.cart.forEach(item => {
-    //       sumatoria += item.priceItem * item.cantidad;
-    //     });
-    //     return sumatoria;
-    //   } else {
-    //     console.log("no cumple ");
-    //     return 0;
-    //   }
-    // }
+    user(state) {
+      return state.user;
+    },
+    loginStatus(state) {
+      return state.user.loggedIn;
+    }
   },
   mutations: {
-    // insertBanner(state, payload) {
-    //   state.banners.push(payload);
-    // },
-    // addItem(state, payload) {
-    //   console.log(payload);
-    //   var item = state.cart.find(item => item.id === payload.id);
-    //   if (item) {
-    //     item.cantidad = item.cantidad + 1;
-    //   } else {
-    //     var load = {
-    //       id: payload.id,
-    //       product: payload.marca + " " + payload.name,
-    //       price: payload.precio,
-    //       priceItem: payload.precioItem,
-    //       cantidad: 1
-    //     };
-    //     state.cart.push(load);
-    //   }
-    // },
-    // resetCart(state) {
-    //   state.cart = [];
-    // }
-    saluda() {
-      console.log("saluda");
+    SET_LOGGED_IN(state, value) {
+      state.user.loggedIn = value;
+    },
+    SET_USER(state, data) {
+      state.user.data = data;
+    },
+    SET_STATUS(state, data) {
+      state.user.success = data;
+    },
+    SET_MESSAGE(state, data) {
+      state.user.message = data;
     }
   },
   actions: {
-    logeo({ commit }, credential) {
-      console.log(credential);
-      console.log("Entraste al store de login",);
-      console.log(credential.email, credential.key);
+    // logearse({ commit }, user) {
+    //   auth
+    //     .createUserWithEmailAndPassword(user.email, user.key)
+    //     .then(user => {
+    //       if (user) {
+    //         commit("SET_USER", {
+    //           displayName: user.displayName,
+    //           email: user.email
+    //         });
+    //         commit("SET_STATUS", 1);
+    //       } else {
+    //         commit("SET_USER", null);
+    //         commit("SET_STATUS", 2);
+    //       }
+    //     })
+    //     .catch(error => {
+    //       var errorCode = error.code;
+    //       var errorMessage = error.message;
+    //       console.log(errorCode, errorMessage);
+    //       commit("SET_STATUS", 2);
+    //     });
+    // }
+    fetchUser({ commit }, user) {
+      console.log("credenciales", user);
       auth
-        .createUserWithEmailAndPassword(credential.email, credential.key)
+        .signInWithEmailAndPassword(user.email, user.key)
         .then(user => {
-          console.log(user);
+          commit("SET_LOGGED_IN", user !== null);
+          if (user) {
+            commit("SET_USER", {
+              displayName: user.displayName,
+              email: user.email
+            });
+            commit("SET_STATUS", 1);
+          } else {
+            commit("SET_USER", null);
+            commit("SET_STATUS", 2);
+          }
         })
         .catch(error => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode, errorMessage);
-          // ..
+          commit("SET_STATUS", 2);
+          commit("SET_MESSAGE", error.messag);
         });
-      commit("saluda");
     }
   }
 };
