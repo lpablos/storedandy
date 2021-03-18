@@ -54,7 +54,7 @@ export default {
       this.$refs.form.reset()
     },
     resetValidation() {
-      this.$refs.form.resetValidation()
+      this.$refs.form.resetValidation();
     },
     loginInfo() {
       this.$emit("infoLogin", this.form);

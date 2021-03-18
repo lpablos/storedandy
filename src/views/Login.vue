@@ -26,11 +26,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loginStatus: "login/loginStatus"
+      loginStatus: "login/getUser"
     })
   },
   watch: {
     loginStatus: value => {
+      console.log("Se obtiene el redireccionamiento");
       value
         ? router.replace({ name: "Admin" })
         : router.replace({ name: "Login" });

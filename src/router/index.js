@@ -30,6 +30,14 @@ const routes = [
     meta: {
       authRequired: true
     }
+  },
+  {
+    path: "/admin/indexx",
+    name: "Admin",
+    component: Admin,
+    meta: {
+      authRequired: true
+    }
   }
 ];
 
