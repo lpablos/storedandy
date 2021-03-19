@@ -51,9 +51,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.authRequired);
   const currentUser = auth.currentUser;
-  if (requiresAuth && !currentUser) next({ path: "/Login" });
-  else if (!requiresAuth && currentUser) next({ path: "Home"});
-  else if (!requiresAuth && !currentUser) next();
+  if (requiresAuth && currentUser) next({ name: "Admin" });
   else next();
 });
 
