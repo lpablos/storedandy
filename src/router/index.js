@@ -4,7 +4,8 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Admin from "../views/Admin.vue";
 import firebase from "../firestoreConfig";
-import store from "../store";
+const auth = firebase.auth();
+// import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -48,20 +49,29 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.authRequired)) {
-    // if (firebase.auth().currentUser) {
-    if (store.state.login.user.loggedIn || firebase.auth().currentUser){
-      // alert("Estas logeado");
-      next();
-    } else {
-      // alert("You must be logged in to see this page");
-      next({
-        path: "/"
-      });
-    }
-  } else {
-    next();
-  }
+  const requiresAuth = to.matched.some(x => x.meta.authRequired);
+  const currentUser = auth.currentUser;
+  if (requiresAuth && !currentUser) next({ path: "/Login" });
+  else if (!requiresAuth && currentUser) next({ path: "Home"});
+  else if (!requiresAuth && !currentUser) next();
+  else next();
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.authRequired)) {
+//     // if (firebase.auth().currentUser) {
+//     if (store.state.login.user.loggedIn || firebase.auth().currentUser){
+//       // alert("Estas logeado");
+//       next();
+//     } else {
+//       // alert("You must be logged in to see this page");
+//       next({
+//         path: "/"
+//       });
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
