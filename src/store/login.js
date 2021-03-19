@@ -4,6 +4,7 @@ const auth = firebase.auth();
 export default {
   namespaced: true,
   state: {
+    statusLog: false,
     currentUser: {}
   },
   getters: {
@@ -13,8 +14,11 @@ export default {
   },
   mutations: {
     setCurrentUser(state, user) {
-      console.log("setCurrentUser", user);
       state.currentUser = user;
+    },
+    clearData(state) {
+      state.currentUser = {};
+      state.statusLog = false;
     }
   },
   actions: {
@@ -27,6 +31,17 @@ export default {
         })
         .catch(error => {
           console.log("Este es el error", error);
+        });
+    },
+    async logOut({ commit }) {
+      await auth
+        .signOut()
+        .then(() => {
+          commit("clearData");
+        })
+        .catch(error => {
+          console.log("este es el error de cerrar session", error);
+          // An error happened.
         });
     }
   }
