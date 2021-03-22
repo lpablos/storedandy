@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: "/admin/indexx",
-    name: "Admin",
+    name: "Adminn",
     component: Admin,
     meta: {
       authRequired: true
@@ -51,8 +51,19 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.authRequired);
   const currentUser = auth.currentUser;
-  if (requiresAuth && currentUser) next({ name: "Admin" });
-  else next();
+  if (requiresAuth) {
+    console.log("Ruta que requiere login");
+    if (currentUser) {
+      console.log("Con usuario");
+      next();
+    } else {
+      console.log("Sin usuario");
+      next({ name: "Login" });
+    }
+  } else {
+    console.log("Paginas sin autentificacion");
+    next();
+  }
 });
 
 // router.beforeEach((to, from, next) => {

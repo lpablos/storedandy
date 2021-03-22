@@ -3,6 +3,7 @@
     <v-container class="py-0 fill-height">
       <v-avatar class="mr-10" color="grey darken-1" size="32"></v-avatar>
       <v-btn v-for="link in links" :key="link" text> {{ link }}</v-btn>
+      <log-out />
       <v-spacer></v-spacer>
       <v-responsive max-width="260">
         <v-text-field
@@ -17,7 +18,10 @@
   </v-app-bar>
 </template>
 <script>
+import LogOut from "../buttons/LogOut.vue";
+
 export default {
+  components: { LogOut },
   name: "MainMenuAdmin",
   data: () => ({
     links: ["Productos", "Pedidos", "Mi cuenta", "Configuración"]

@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     statusLog: false,
-    currentUser: {}
+    currentUser: null
   },
   getters: {
     getUser(state) {
@@ -17,14 +17,14 @@ export default {
       state.currentUser = user;
     },
     clearData(state) {
-      state.currentUser = {};
+      state.currentUser = null;
       state.statusLog = false;
     }
   },
   actions: {
-    fetchUser({ commit }, userlog) {
+    async fetchUser({ commit }, userlog) {
       console.log("se logea");
-      auth
+      await auth
         .signInWithEmailAndPassword(userlog.email, userlog.key)
         .then(user => {
           commit("setCurrentUser", user);
@@ -41,7 +41,6 @@ export default {
         })
         .catch(error => {
           console.log("este es el error de cerrar session", error);
-          // An error happened.
         });
     }
   }

@@ -31,7 +31,6 @@ export default {
   },
   watch: {
     loginStatus: value => {
-      console.log("Se obtiene el redireccionamiento");
       value
         ? router.replace({ name: "Admin" })
         : router.replace({ name: "Login" });
