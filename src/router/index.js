@@ -25,20 +25,19 @@ const routes = [
     component: Login
   },
   {
-    path: "/admin/index",
+    path: "/welcome/index",
     name: "Admin",
     component: Admin,
     meta: {
       authRequired: true
-    }
-  },
-  {
-    path: "/admin/indexx",
-    name: "Adminn",
-    component: Admin,
-    meta: {
-      authRequired: true
-    }
+    },
+    children: [
+      {
+        path: "registre",
+        name: "registre",
+        component: Admin
+      }
+    ]
   }
 ];
 
@@ -52,16 +51,12 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.authRequired);
   const currentUser = auth.currentUser;
   if (requiresAuth) {
-    console.log("Ruta que requiere login");
     if (currentUser) {
-      console.log("Con usuario");
       next();
     } else {
-      console.log("Sin usuario");
       next({ name: "Login" });
     }
   } else {
-    console.log("Paginas sin autentificacion");
     next();
   }
 });
